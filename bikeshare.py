@@ -26,7 +26,7 @@ logo = f"""{Fore.CYAN}
 
 
 print(logo)
-print('\n        __ Let\'s explore some US bikeshare data __        \n')
+print('\n        __ Let\'s analyze some US bikeshare data __        \n')
 
 def get_filters():
 
@@ -41,7 +41,7 @@ def get_filters():
 
     # get user input for city. 
     while True:
-        entry_city=input('\nEnter a number (from 1 to 3) to select the wanted city:\n\n[1] -  Chicago\n[2] -  New York City\n[3] -  Washington      >>>   ')
+        entry_city=input('\nEnter a number to select one of the following cities:\n\n[1] -  Chicago\n[2] -  New York City\n[3] -  Washington      >>>   ')
         try:
             city = CITY_select[entry_city]
             print('-'*20)
@@ -49,14 +49,14 @@ def get_filters():
             print('-'*30)
             break
         except KeyError:
-            print('\nPlease enter only a number from 1 to 3 !\n')
+            print('\nPlease enter only a number (1,2 or 3) \n')
                    
     # get user input for a month exists in the csv sheets.
     while True:
         print()
         month_message=(
-            'Enter a number (from 1 to 7) to select the wanted month:\n\n'
-            '[1] -  *All months*\n'
+            'Now, please enter a number to apply the month filter:\n\n'
+            '[1] -  *All months* (no filter)\n'
             '[2] -   January\n'
             '[3] -   February\n'
             '[4] -   March\n'
@@ -72,7 +72,7 @@ def get_filters():
             print('-'*30)
             break
         except KeyError:
-            print('\nPlease enter only a number from 1 to 7 !\n')
+            print('\nPlease enter only a number from 1 to 7 \n')
 
  
     # get user input for day of week (All, monday, tuesday, ... sunday).
@@ -80,8 +80,8 @@ def get_filters():
     while True:
         print()
         day_message=(
-        'Enter a number (from 1 to 8) to select the wanted day:\n\n'
-        '[1] - *All days*\n'
+        'Last step, enter a number to apply the day filter:\n\n'
+        '[1] - *All days* (no filter)\n'
         '[2] -  Monday\n'
         '[3] -  Tuesday\n'
         '[4] -  Wednesday\n'
@@ -98,7 +98,7 @@ def get_filters():
             print(f'Processing data for\nCity: {city} - Month(s): {month} - Day(s): {day}')
             break
         except KeyError:
-            print('\nPlease enter only a number from 1 to 8 !\n')
+            print('\nPlease enter only a number from 1 to 8 \n')
     
     print('-'*55)
     return city, month, day
