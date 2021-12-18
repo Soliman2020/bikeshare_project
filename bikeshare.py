@@ -1,5 +1,7 @@
+# Modules
 import time
 import pandas as pd
+from colorama import Fore
 
 CITY_DATA = { 'Chicago': 'chicago.csv',
               'New York City': 'new_york_city.csv',
@@ -16,6 +18,14 @@ day_select = {'1':'All', '2':'Monday','3':'Tuesday','4':'Wednesday',
               '5':'Thursday','6':'Friday','7':'Saturday','8':'Sunday'}
 
 
+logo = f"""{Fore.CYAN}
+█▀▄ ▀ █ ▄▀ █▀▀ ▄▀▀ █   ▄▀▄ █▀▀▄ █▀▀
+█▀█ █ █▀▄  █▀▀  ▀▄ █▀▄ █▀█ █▐█▀ █▀▀
+▀▀  ▀ ▀ ▀  ▀▀▀ ▀▀▀ ▀ ▀ ▀ ▀ ▀ ▀▀ ▀▀▀\n{Fore.RESET}Made by Soliman2020"""
+
+
+
+print(logo)
 print('\n        __ Let\'s explore some US bikeshare data __        \n')
 
 def get_filters():
@@ -31,7 +41,7 @@ def get_filters():
 
     # get user input for city. 
     while True:
-        entry_city=input('Enter a number (from 1 to 3) to select the wanted city:\n\n1:  Chicago\n2:  New York City\n3:  Washington      >>>   ')
+        entry_city=input('\nEnter a number (from 1 to 3) to select the wanted city:\n\n[1] -  Chicago\n[2] -  New York City\n[3] -  Washington      >>>   ')
         try:
             city = CITY_select[entry_city]
             print('-'*20)
@@ -46,13 +56,13 @@ def get_filters():
         print()
         month_message=(
             'Enter a number (from 1 to 7) to select the wanted month:\n\n'
-            '1:  *All months*\n'
-            '2:  January\n'
-            '3:  February\n'
-            '4:  March\n'
-            '5:  April\n'
-            '6:  May\n'
-            '7:  June      >>>   '
+            '[1] -  *All months*\n'
+            '[2] -   January\n'
+            '[3] -   February\n'
+            '[4] -   March\n'
+            '[5] -   April\n'
+            '[6] -   May\n'
+            '[7] -   June      >>>   '
                     )
         entry_month=input(month_message)
         try:
@@ -71,21 +81,21 @@ def get_filters():
         print()
         day_message=(
         'Enter a number (from 1 to 8) to select the wanted day:\n\n'
-        '1: *All days*\n'
-        '2: Monday\n'
-        '3: Tuesday\n'
-        '4: Wednesday\n'
-        '5: Thursday\n'
-        '6: Friday\n'
-        '7: Saturday\n'
-        '8: Sunday      >>>   '   
+        '[1] - *All days*\n'
+        '[2] -  Monday\n'
+        '[3] -  Tuesday\n'
+        '[4] -  Wednesday\n'
+        '[5] -  Thursday\n'
+        '[6] -  Friday\n'
+        '[7] -  Saturday\n'
+        '[8] -  Sunday      >>>   '   
                     )
         entry_day=input(day_message)
         try:
             day = day_select[entry_day]
             print()
             print('-'*55)
-            print('Processing data for\nCity: {} - Month(s): {} - Day(s): {}'.format(city,month,day))
+            print(f'Processing data for\nCity: {city} - Month(s): {month} - Day(s): {day}')
             break
         except KeyError:
             print('\nPlease enter only a number from 1 to 8 !\n')
@@ -131,7 +141,12 @@ def load_data(city,month,day):
 
 def time_stats(df):
 
-    """ Displays statistics on the most frequent times of travel."""
+    """ Displays statistics on the most frequent times of travel.
+        
+        Args: 
+        (DataFrame) df - DataFrame created depending on previous filters.
+    
+    """
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
@@ -151,7 +166,12 @@ def time_stats(df):
 
 def station_stats(df):
 
-    """ Displays statistics on the most, least popular stations and trip."""
+    """ Displays statistics on the most, least popular stations and trip.
+        
+        Args: 
+        (DataFrame) df - DataFrame created depending on previous filters.
+    
+    """
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
@@ -179,7 +199,12 @@ def station_stats(df):
 
 def trip_duration_stats(df):
 
-    """ Displays statistics on the total and average trip duration."""
+    """ Displays statistics on the total and average trip duration.
+        
+        Args: 
+        (DataFrame) df - DataFrame created depending on previous filters.
+    
+    """
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
@@ -202,7 +227,13 @@ def trip_duration_stats(df):
 
 def user_stats(df,city):
 
-    """ Displays statistics on bikeshare users."""
+    """ Displays statistics on bikeshare users.
+    
+        Args: 
+        (DataFrame) df - DataFrame created depending on previous filters.
+        (str) city - name of the city to apply an extra filter.
+    
+    """
 
     print('\nCalculating User Stats...\n')
     start_time = time.time()
@@ -233,7 +264,7 @@ def user_stats(df,city):
         print('-'*40)
 
         # Display earliest, most recent, and most common year of birth
-        print('\nEarliest, most recent, and most common year of birth:\n')
+        print('\nEarliest, most recent and most common year of birth:\n')
         common_year=df['Birth Year'].mode()[0]
         print('* Most common year of birth:   ',int(common_year))
         earliest_year=df['Birth Year'].min()
@@ -252,10 +283,14 @@ def row_data(df):
         Display that data if the answer is 'yes',
         Continue iterating these prompts and displaying the next 5 lines of raw data at each iteration,
         Stop the program when the user says 'no' or there is no more raw data to display.
+
+        Args:
+        (DataFrame) df - DataFrame created depending on previous filters.
+
      '''
 
     while True:
-        desire = input('Do you want to check the top 5 lines of raw data? Enter yes or no >>  ')
+        desire = input('Do you want to check the top 5 lines of raw data? Enter \'yes\' to confirm or any other entry to skip. >>  ')
         if desire.lower() != 'yes':
             break
         else:
@@ -263,7 +298,7 @@ def row_data(df):
             while x<len(df):
                 Y=df.iloc[x:x+5]
                 print(Y)
-                need_more=input('Check next 5 rows data? Enter yes or no >>  ')
+                need_more=input('\nWanna display the next 5 rows data? Enter \'yes\' to confirm or any other entry to skip. >>  ')
                 if need_more.lower()=='yes':
                     x+=5
                 else:
@@ -273,6 +308,9 @@ def row_data(df):
     print('-'*40)
             
 def main():
+
+    ''' Main function that links all of our functions to work together and do the asked calculations.  
+    '''
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
@@ -283,7 +321,7 @@ def main():
         user_stats(df,city)
         row_data(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Enter \'yes\' to confirm or any other entry to shutdown. \n')
         if restart.lower() != 'yes':
             print('___ Thanks ___')
             break
