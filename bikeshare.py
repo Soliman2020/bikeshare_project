@@ -297,6 +297,7 @@ def row_data(df):
             x=0
             while x<len(df):
                 Y=df.iloc[x:x+5]
+		pd.set_option('display.max_columns',20)  # to display the complete/undiducted table and avoid the collapsed columns.
                 print(Y)
                 need_more=input('\nWanna display the next 5 rows data? Enter \'yes\' to confirm or any other entry to skip. >>  ')
                 if need_more.lower()=='yes':
