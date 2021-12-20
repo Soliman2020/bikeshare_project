@@ -119,8 +119,34 @@ def load_data(city,month,day):
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA.get(city))
 
+        # TODO: Checking errors (duplicates ,NaN or wrong data types) in the data frame.
+    # print(df.info())
+    # print()
+
+    # # TODO: Missing data counter before any fix.
+    # print('NaN_Before_Fix= ',df.isnull().sum().sum())
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
+    
+   
+    if city!="Washington": 
+        ## Fix NaN issue for (Gender) by Forward Fill.
+        df['Gender']=df['Gender'].fillna(method = 'ffill', axis = 0)
+        ## Fix NaN issue for (User Type) by Forward Fill.
+        df['User Type'] = df['User Type'].fillna(method = 'ffill', axis = 0)
+        ## Fix NaN issue for (Birth Year) by doing mean.
+        mean_birth= df['Birth Year'].mean()
+        df['Birth Year']=df['Birth Year'].fillna(mean_birth)
+        # Convert the Birth Year column to integer
+        df['Birth Year']= df['Birth Year'].astype(int)
+
+    # # TODO: Missing data counter after our fix.
+    # print('NaN_After_Fix =',df.isnull().sum().sum())
+
+    # # Checking for duplicates and do fixing in case of we had some:
+    # print('Duplicated_data = ',sum(df.duplicated()))
+    df.drop_duplicates(inplace=True)
 
     # extract month, day of week and hour from Start Time to create new columns
     df['Month'] = df['Start Time'].dt.month_name()
