@@ -1,4 +1,6 @@
+
 # bikeshare_project
+
 Analyze data from three different csv files. 
 then depending on the user selection (Interactive Experience) apply the descriptive statistics to answer questions about the data.
 
@@ -26,3 +28,4 @@ References:
 6. https://datascienceparichay.com/article/most-frequent-value-in-a-pandas-column/
 7. https://stackoverflow.com/questions/8577027/how-to-declare-a-long-string-in-python
 8. https://thispointer.com/pandas-count-values-in-a-column/
+
