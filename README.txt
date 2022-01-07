@@ -1,6 +1,20 @@
 # bikeshare_project
-Using Pandas mainly to analyze three different big-size .csv files.
-Then use the descriptive statistics to answer questions about the data. 
+Analyze data from three different csv files. 
+then depending on the user selection (Interactive Experience) apply the descriptive statistics to answer questions about the data.
+
+Skills: Python
+
+----------------------------------------------
+
+An Interactive Experience
+A script that takes in raw input to create an interactive experience in the terminal that answers questions about the dataset. 
+There are four questions that will change the answers:
+
+1. Would you like to see data for Chicago, New York, or Washington?
+2. Would you like to filter the data by month, day, or not at all?
+3. (If they chose month) Which month - January, February, March, April, May, or June?
+4. (If they chose day) Which day - Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, or Sunday?
+
 
 
 References:
@@ -12,6 +26,3 @@ References:
 6. https://datascienceparichay.com/article/most-frequent-value-in-a-pandas-column/
 7. https://stackoverflow.com/questions/8577027/how-to-declare-a-long-string-in-python
 8. https://thispointer.com/pandas-count-values-in-a-column/
-
-Helpful Web Tool:
-https://text-compare.com
